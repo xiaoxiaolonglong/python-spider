@@ -88,7 +88,7 @@ def getData(baseUrl):
             dataList.append(data)
     return dataList
 
-# 得到制定url的网页内容
+# 得到指定url的网页内容
 def askUrl(url):
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36 Edg/84.0.522.52"
@@ -105,9 +105,7 @@ def askUrl(url):
             print(e.reason)
     return html
 
-
-
-#3.保存数据
+#3.保存数据到excel
 def saveData(datalist,savePath):
     # 2.逐一解析数据
     print("save...")
@@ -123,6 +121,7 @@ def saveData(datalist,savePath):
             sheet.write(i+1,j,data[j])
     book.save(savePath)
 
+#3.保存数据到数据库
 def saveDataDB(datalist,dbpath):
     init_db(dbpath)
     conn = sqlite3.connect(dbpath)
@@ -141,6 +140,7 @@ def saveDataDB(datalist,dbpath):
     cur.close()
     conn.close()
     print('保存数据到数据库完成')
+
 # 初始化数据库
 def init_db(dbpath):
     sql = '''
@@ -164,6 +164,7 @@ def init_db(dbpath):
     cursor.close()
     conn.close()
     print('数据库创建成功')
+
 if __name__ == "__main__":#当程序执行时
     # init_db('test.db')
     main()
